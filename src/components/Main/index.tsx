@@ -6,62 +6,33 @@ import "@/components/Main/styles";
 
 export const Main = () => {
   const [novaTarefa, setNovaTarefa] = React.useState("");
+  const [index, setIndex] = React.useState (-1);
   const [tarefas, setTarefas] = React.useState<string[]>(
     JSON.parse(localStorage.getItem("tarefas") ?? "")
   );
 
-  // state = {
-  //   novaTarefa: '',
-  //   tarefas: [],
-  //   index: -1,
-  // };
-
-  handleSubmit = (e) => {
+ function handleSubmit (e: any,index: number) {
     e.preventDefault();
-    // const { tarefas, index } = state;
-    // let { novaTarefa } = state;
-    novaTarefa = novaTarefa.trim();
+    let newNovaTarefa = novaTarefa.trim()
 
     if (tarefas.indexOf(novaTarefa) !== -1) return;
-
-    const novasTarefas = [...tarefas];
-
-    if (index === -1) {
-      setTarefas([...novasTarefas, novaTarefa]);
-      setNovaTarefa("");
-    } else {
-      novasTarefas[index] = novaTarefa;
-
-      setState({
-        tarefas: [...novasTarefas],
-        index: -1,
-      });
-    }
+      setNovaTarefa("");  
+      setTarefas(state => [...state,novaTarefa])
   };
 
-  function HandleChange(e) {
-    setState({
-      novaTarefa: e.target.value,
-    });
+  function HandleChange(e: any) {
+      setNovaTarefa(e.target.value);
   }
 
-  handleEdit = (_: any, index: number) => {
-    // const { tarefas } = state;
-
-    setState({
-      index,
-      novaTarefa: tarefas[index],
-    });
+  function handleEdit (e: any, index: number) {
+      setNovaTarefa(tarefas[index]);
+      setIndex(index);
+  
   };
 
-  handleDelete = (e, index) => {
-    const { tarefas } = state;
-    const novaTarefas = [...tarefas];
-    novaTarefas.splice(index, 1);
-
-    setState({
-      tarefas: [...novaTarefas],
-    });
+  function  handleDelete (e: any, index: number) {
+    setTarefas(state => state.splice(index, 1));
+    };
   };
 
   React.useEffect(() => {
