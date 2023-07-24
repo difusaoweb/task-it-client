@@ -30,10 +30,9 @@ export const Main = () => {
   
   };
 
-  function  handleDelete (e: any, index: number) {
+  function  handleDelete (index: number) {
     setTarefas(state => state.splice(index, 1));
     };
-  };
 
   React.useEffect(() => {
     localStorage.setItem("tarefas", JSON.stringify(tarefas));

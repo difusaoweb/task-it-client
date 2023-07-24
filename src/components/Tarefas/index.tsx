@@ -7,7 +7,7 @@ import "./Tarefas.css";
 interface TarefasPropsTypes {
   tarefas: string[];
   handleEdit: (_: any, index: number) => void;
-  handleDelete: () => void;
+  handleDelete: (index : number) => void;
 }
 
 export const Tarefas = ({
@@ -27,7 +27,7 @@ export const Tarefas = ({
             />
 
             <FaWindowClose
-              onClick={(e) => handleDelete(e, index)}
+              onClick={(e) => handleDelete(index)}
               className="delete"
             />
           </span>
