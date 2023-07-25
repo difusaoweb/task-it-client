@@ -11,7 +11,7 @@ export const Main = () => {
     JSON.parse(localStorage.getItem("tarefas") ?? "")
   );
 
- function handleSubmit (e: any,index: number) {
+ function handleSubmit (e: any) {
     e.preventDefault();
     let newNovaTarefa = novaTarefa.trim()
 
