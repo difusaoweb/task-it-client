@@ -1,6 +1,6 @@
 import * as React from "react";
 
-// import Form from './Form';
+import {Form} from '@/components/Form';
 import { Tarefas } from "@/components/Tarefas";
 import "@/components/Main/styles";
 
@@ -20,8 +20,8 @@ export const Main = () => {
       setTarefas(state => [...state,novaTarefa])
   };
 
-  function HandleChange(e: any) {
-      setNovaTarefa(e.target.value);
+  function handleChange(novaTarefa: string) {
+      setNovaTarefa(novaTarefa);
   }
 
   function handleEdit (e: any, index: number) {
@@ -40,11 +40,11 @@ export const Main = () => {
 
   return (
     <>
-      {/* <Form
+       <Form
         handleSubmit={handleSubmit}
-        HandleChange={HandleChange}
+        handleChange={handleChange}
         novaTarefa={novaTarefa}
-  /> */}
+  /> 
       <Tarefas
         tarefas={tarefas}
         handleEdit={handleEdit}
