@@ -2,7 +2,7 @@
 
 import { Main } from "@/components/Main";
 
-export default function HomePage() {
+async function HomePage() {
   return (
     <div className="main">
       <h1>Lista de tarefas</h1>

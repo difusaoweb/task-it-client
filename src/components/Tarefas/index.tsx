@@ -2,7 +2,7 @@
 import * as React from "react";
 import { FaEdit, FaWindowClose } from "react-icons/fa";
 
-import "./Tarefas.css";
+import "@/components/Tarefas/styles.css";
 
 interface TarefasPropsTypes {
   tarefas: string[];

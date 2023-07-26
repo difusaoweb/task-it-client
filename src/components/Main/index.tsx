@@ -2,7 +2,7 @@ import * as React from "react";
 
 import {Form} from '@/components/Form';
 import { Tarefas } from "@/components/Tarefas";
-import "@/components/Main/styles";
+import "@/components/Main/styles.css";
 
 export const Main = () => {
   const [novaTarefa, setNovaTarefa] = React.useState("");
