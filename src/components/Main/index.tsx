@@ -1,3 +1,4 @@
+"use client"
 import * as React from "react";
 
 import {Form} from '@/components/Form';
@@ -11,13 +12,24 @@ export const Main = () => {
     JSON.parse(localStorage.getItem("tarefas") ?? "")
   );
 
- function handleSubmit (e: any) {
+  function handleSubmit (e: any) {
     e.preventDefault();
     let newNovaTarefa = novaTarefa.trim()
 
     if (tarefas.indexOf(novaTarefa) !== -1) return;
-      setNovaTarefa("");  
+
+    if (index !== -1) {
+      setTarefas(state => {
+        const newState = [...state]; 
+        newState[index] = newNovaTarefa; 
+        return newState;
+      });
+
+      setIndex(-1)
+    } else {
       setTarefas(state => [...state,novaTarefa])
+      setNovaTarefa("");  
+    }
   };
 
   function handleChange(novaTarefa: string) {
@@ -30,9 +42,13 @@ export const Main = () => {
   
   };
 
-  function  handleDelete (index: number) {
-    setTarefas(state => state.splice(index, 1));
-    };
+  function handleDelete(index: number) {
+    setTarefas(state => {
+      const newState = [...state]; 
+      newState.splice(index, 1); 
+      return newState;
+    })
+}
 
   React.useEffect(() => {
     localStorage.setItem("tarefas", JSON.stringify(tarefas));
