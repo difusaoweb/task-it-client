@@ -1,17 +1,27 @@
 "use client"
-import * as React from "react";
 
 import {Form} from '@/components/Form';
 import { Tarefas } from "@/components/Tarefas";
 import "@/components/Main/styles.css";
+import { useEffect, useState } from 'react';
+import React from 'react';
 
 export const Main = () => {
-  const [novaTarefa, setNovaTarefa] = React.useState("");
-  const [index, setIndex] = React.useState (-1);
-  const [tarefas, setTarefas] = React.useState<string[]>(
-    JSON.parse(localStorage.getItem("tarefas") ?? "")
-  );
+  const [novaTarefa, setNovaTarefa] = useState("");
+  const [index, setIndex] = useState (-1);
+  const [tarefas, setTarefas] = useState<string[]>([]);
 
+  useEffect(() => {
+    const tarefas = JSON.parse(localStorage.getItem('tarefas') || ''); 
+    if (tarefas) {
+        setTarefas(tarefas);
+    }
+}, []) 
+
+useEffect(() => {
+    localStorage.setItem('tarefas', JSON.stringify(tarefas));
+}, [tarefas])
+ 
   function handleSubmit (e: any) {
     e.preventDefault();
     let newNovaTarefa = novaTarefa.trim()
