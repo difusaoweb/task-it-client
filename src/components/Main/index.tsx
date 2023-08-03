@@ -12,9 +12,9 @@ export const Main = () => {
   const [tarefas, setTarefas] = useState<string[]>([]);
 
   useEffect(() => {
-    const tarefas = JSON.parse(localStorage.getItem('tarefas') || ''); 
-    if (tarefas) {
-        setTarefas(tarefas);
+    const tarefas = localStorage.getItem('tarefas'); 
+    if (tarefas) { 
+        setTarefas(JSON.parse(tarefas));
     }
 }, []) 
 

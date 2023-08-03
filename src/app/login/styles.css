@@ -101,7 +101,7 @@
   .focus-input::after {
     font-family: Nunito, sans-serif;
     font-size: 15px;
-    color: #999999;
+    color: #999;
     line-height: 1.2;
     content: attr(data-placeholder);
     display: block;
