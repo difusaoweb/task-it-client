@@ -11,7 +11,7 @@ interface FormPropTypes {
 }
  export const Form = ({ handleChange, handleSubmit, novaTarefa}:FormPropTypes) => {
   return (
-    <form onSubmit={handleSubmit} action="#" className="form">
+    <form onSubmit={handleSubmit} className="form">
       <input
       onChange={(e) => handleChange(e.target.value)}
       type="text"
