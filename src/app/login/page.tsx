@@ -1,22 +1,40 @@
 "use client";
-import { useState } from 'react';
-
+import { use, useState } from 'react';
 import Image from 'next/image'
 
-import './styles.css'
+import './global.css'
+import DifusaoWebImage from '@/assets/difusao.jpg'
+import { LayoutComponents } from '@/components/LayoutComponents';
+import { axiosAPI } from "@/services/api";
+import { url } from 'inspector';
+import { useRouter } from 'next/navigation';
+import { setToken } from '@/services/CookieService';
 
-import DifusaoWebImage from '@/components/assets/difusao.jpg'
+export default function LoginPage () {
+   const router = useRouter() 
 
-
-export default function LoginPage() {
-    const [email, setEmail] = useState("")
+  const [email, setEmail] = useState("")
     const [password, setPassword] = useState("");
     
+    async function postAccess(e:any) {
+       try {
+         e.preventDefault();
+         const {data} = await axiosAPI.post('/accesses', {
+          email,
+          password})
+         const {hash} = data.token
+         setToken({token: hash})
+
+
+          router.push('/')
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    
     return (
-       <div className="container">
-        <div className="container-login">
-            <div className="wrap-login">
-                <form className="login-form">
+      <LayoutComponents>
+                <form className="login-form" onSubmit={postAccess}>
                     <span className="login-form-title">Bem Vindo!</span>
                     <span className="login-form-title">
                     <Image src={DifusaoWebImage}
@@ -31,6 +49,7 @@ export default function LoginPage() {
                      value={email}
                      onChange={(e) => setEmail(e.target.value)}
                     />
+                    
                      <span className="focus-input" data-placeholder="Email"></span>
                     </div>
 
@@ -41,22 +60,21 @@ export default function LoginPage() {
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
               />
+
               <span className="focus-input" data-placeholder="Password"></span>
             </div>
 
             <div className="container-login-form-btn">
-              <button className="login-form-btn">Login</button>
+              <button className="login-form-btn" type="submit">Login</button>
             </div>
 
             <div className="text-center">
               <span className="txt1">Não possui conta? </span>
-              <a className="txt2" href="#">
+              <a className="txt2" href="./register">
                 Criar conta
               </a>
             </div>
           </form>
-        </div>
-      </div>
-    </div>
+          </LayoutComponents>
   );
-}
+};
